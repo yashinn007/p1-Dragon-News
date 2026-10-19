@@ -1,24 +1,7 @@
 import LeftSidebar from "@/components/homepage/news/LeftSidebar";
 import RightSidebar from "@/components/homepage/news/RightSidebar";
+import { getCategories, getNewsByCategorieId } from "@/lib/data";
 import React from "react";
-
-const getCategories = async () => {
-  "use cache";
-  const res = await fetch(
-    "https://openapi.programming-hero.com/api/news/categories",
-  );
-  const data = await res.json();
-  return data.data;
-};
-
-const getNewsByCategorieId = async (category_id) => {
-  "use cache";
-  const res = await fetch(
-    `https://openapi.programming-hero.com/api/news/category/${category_id}`,
-  );
-  const data = await res.json();
-  return data.data;
-};
 
 const NewsCategoryPage = async ({ params }) => {
   const { id } = await params;
@@ -28,7 +11,7 @@ const NewsCategoryPage = async ({ params }) => {
   //console.log("categories", categories.news_category);
 
   const news = await getNewsByCategorieId(id);
-  console.log("news:", news);
+  //console.log("news:", news);
 
   return (
     <div className="container mx-auto grid grid-cols-12 gap-5 my-15">
