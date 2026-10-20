@@ -1,4 +1,5 @@
 import LeftSidebar from "@/components/homepage/news/LeftSidebar";
+import NewsCard from "@/components/homepage/news/NewsCard";
 import RightSidebar from "@/components/homepage/news/RightSidebar";
 import { getCategories, getNewsByCategorieId } from "@/lib/data";
 import { Suspense } from "react";
@@ -35,16 +36,12 @@ const NewsCategoryContent = async ({ params }) => {
         <LeftSidebar categories={categories} activeId={id}></LeftSidebar>
       </div>
       {/* ----col-2------ */}
-      <div className=" bg-purple-100 col-span-6 min-h-screen">
+      <div className="col-span-6 min-h-screen">
         <h2 className="font-bold text-lg mb-5">All News</h2>
         <div className="space-y-4">
           {news.length > 0 ? (
             news.map((n) => {
-              return (
-                <div key={n._id} className="p-6 rounded-md border">
-                  {n.title}
-                </div>
-              );
+              return <NewsCard key={n._id} news={n}></NewsCard>;
             })
           ) : (
             <div className="font-bold text-4xl text-center my-7">
