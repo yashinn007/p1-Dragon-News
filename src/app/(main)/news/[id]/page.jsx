@@ -5,12 +5,22 @@ import { CiBookmark, CiShare2, CiStar } from "react-icons/ci";
 import { FaEye } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 
-const NewsDetailsPage = async ({ params }) => {
+export const generateMetadata = async ({ params }) => {
   const { id } = await params;
-  console.log("id", id);
 
   const news = await getNewsDetailsById(id);
-  console.log(news);
+  return {
+    title: news.title,
+    description: news.details,
+  };
+};
+
+const NewsDetailsPage = async ({ params }) => {
+  const { id } = await params;
+  //console.log("id", id);
+
+  const news = await getNewsDetailsById(id);
+  //console.log(news);
   return (
     <div className="container mx-auto my-8">
       <div className="card bg-base-100 shadow-sm mb-5 pb-5">
