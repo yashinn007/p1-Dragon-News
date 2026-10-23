@@ -2,7 +2,9 @@
 
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const RegisterPage = () => {
   const {
@@ -10,6 +12,8 @@ const RegisterPage = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const [isShowPassword, setIsShowPassword] = useState(false);
 
   const handleRegisterFunc = async (data) => {
     // console.log(data);
@@ -23,7 +27,7 @@ const RegisterPage = () => {
       image: photo,
       callbackURL: "/",
     });
-    console.log("res:", res, error);
+    //console.log("res:", res, error);
 
     if (error) {
       alert(error.message);
@@ -80,14 +84,24 @@ const RegisterPage = () => {
             )}
           </fieldset>
 
-          <fieldset className="fieldset">
+          <fieldset className="fieldset relative ">
             <legend className="fieldset-legend">Password</legend>
             <input
-              type="password"
+              type={isShowPassword ? "text" : "password"}
               className="input"
               {...register("password", { required: "Password is required" })}
               placeholder="Type your password"
             />
+            <span
+              className="absolute right-9 top-4 cursor-pointer "
+              onClick={() => setIsShowPassword(!isShowPassword)}
+            >
+              {isShowPassword ? (
+                <FaEye className="text-lg"></FaEye>
+              ) : (
+                <FaEyeSlash className="text-lg"></FaEyeSlash>
+              )}
+            </span>
             {/* errors will return when field validation fails  */}
             {errors.password && (
               <span className="text-red-500">{errors.password.message}</span>
