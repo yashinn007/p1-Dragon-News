@@ -29,7 +29,7 @@ const LoginPage = () => {
       alert(error.message);
     }
     if (res) {
-      alert("Login Successfull");
+      alert("Login Successfull.");
     }
   };
 
