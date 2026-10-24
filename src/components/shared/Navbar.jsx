@@ -38,7 +38,7 @@ const Navbar = () => {
             className="btn bg-purple-500 text-white"
             onClick={async () => await authClient.signOut()}
           >
-            Log Out
+            Logout
           </button>
         </div>
       ) : (
